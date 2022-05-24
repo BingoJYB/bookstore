@@ -1,4 +1,4 @@
-package com.company.www.utils;
+package com.company.utils;
 
 public class JDBCConstants {
 

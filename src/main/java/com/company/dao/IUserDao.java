@@ -1,6 +1,6 @@
-package com.company.www.dao;
+package com.company.dao;
 
-import com.company.www.entity.User;
+import com.company.entity.User;
 
 public interface IUserDao {
 

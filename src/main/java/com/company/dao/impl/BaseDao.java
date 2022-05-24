@@ -1,10 +1,10 @@
-package com.company.www.dao.impl;
+package com.company.dao.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.company.www.utils.JDBCUtils;
+import com.company.utils.JDBCUtils;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;

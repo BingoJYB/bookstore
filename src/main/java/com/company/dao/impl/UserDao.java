@@ -1,7 +1,7 @@
-package com.company.www.dao.impl;
+package com.company.dao.impl;
 
-import com.company.www.dao.IUserDao;
-import com.company.www.entity.User;
+import com.company.dao.IUserDao;
+import com.company.entity.User;
 
 public class UserDao extends BaseDao implements IUserDao {
 

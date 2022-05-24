@@ -1,4 +1,4 @@
-package com.company.www.utils;
+package com.company.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

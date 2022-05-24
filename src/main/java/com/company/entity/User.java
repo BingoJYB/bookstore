@@ -1,4 +1,4 @@
-package com.company.www.entity;
+package com.company.entity;
 
 public class User {
 
