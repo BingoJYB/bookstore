@@ -46,9 +46,7 @@ public class UserServiceTest {
     @Test
     public void testLogin() {
 
-        User user = new User(null, "Iron Man", "321", "man.iron@gmail.com");
-
-        assertNotNull(userService.login(user));
+        assertNotNull(userService.login("Iron Man", "321"));
     }
 
     @Test

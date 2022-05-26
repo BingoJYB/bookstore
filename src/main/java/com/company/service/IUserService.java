@@ -8,7 +8,7 @@ public interface IUserService {
 
     public void deregisterUser(User user);
 
-    public User login(User user);
+    public User login(String username, String password);
 
     public boolean isUsernameDuplicated(String username);
 

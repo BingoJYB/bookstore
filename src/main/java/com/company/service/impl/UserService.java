@@ -21,10 +21,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User login(User user) {
-
-        String username = user.getUsername();
-        String password = user.getPassword();
+    public User login(String username, String password) {
 
         return userDao.getUserByUsernameAndPassword(username, password);
     }

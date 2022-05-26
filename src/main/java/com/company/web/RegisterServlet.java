@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.company.entity.User;
 import com.company.service.impl.UserService;
 
-public class UserServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
