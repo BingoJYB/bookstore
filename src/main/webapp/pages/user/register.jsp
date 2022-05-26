@@ -87,7 +87,7 @@
 							</div>
 							<div class="form">
 								<form action="UserServlet" method="post">
-									<input type="hidden" name="method" value="regist">
+									<input type="hidden" name="method" value="register">
 									<label>用户名称：</label>
 									<input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username" id="username" value="${param.username}"/>
 									<br />

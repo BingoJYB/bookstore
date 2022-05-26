@@ -4,7 +4,7 @@ import com.company.entity.User;
 
 public interface IUserService {
 
-    public void registerUser(User user);
+    public int registerUser(User user);
 
     public void deregisterUser(User user);
 
