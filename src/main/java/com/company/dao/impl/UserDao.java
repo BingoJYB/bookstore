@@ -26,4 +26,12 @@ public class UserDao extends BaseDao implements IUserDao {
         return update(query, user.getUsername(), user.getPassword(), user.getEmail());
     }
 
+    @Override
+    public int deleteUser(User user) {
+
+        String query = "DELETE FROM t_user WHERE username = ?";
+
+        return update(query, user.getUsername());
+    }
+
 }

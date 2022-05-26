@@ -6,6 +6,8 @@ public interface IUserService {
 
     public void registerUser(User user);
 
+    public void deregisterUser(User user);
+
     public User login(User user);
 
     public boolean isUsernameDuplicated(String username);

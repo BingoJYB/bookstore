@@ -33,4 +33,14 @@ public class UserService implements IUserService {
         return userDao.getUserByUsername(username) != null;
     }
 
+    @Override
+    public void deregisterUser(User user) {
+
+        String username = user.getUsername();
+
+        if (userDao.getUserByUsername(username) != null) {
+            userDao.deleteUser(user);
+        }
+    }
+
 }

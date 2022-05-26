@@ -9,4 +9,7 @@ public interface IUserDao {
     public User getUserByUsernameAndPassword(String username, String password);
 
     public int saveUser(User user);
+
+    public int deleteUser(User user);
+
 }
