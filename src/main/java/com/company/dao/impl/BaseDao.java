@@ -23,6 +23,8 @@ public abstract class BaseDao {
             return runner.update(conn, sql, args);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtils.close(conn);
         }
 
         return -1;
@@ -31,12 +33,13 @@ public abstract class BaseDao {
     public <T> T queryForOne(Class<T> type, String sql, Object... params) {
 
         Connection conn = JDBCUtils.getConnection();
-        BeanHandler<T> beanHandler = new BeanHandler<T>(type);
 
         try {
-            return runner.query(conn, sql, beanHandler, params);
+            return runner.query(conn, sql, new BeanHandler<T>(type), params);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtils.close(conn);
         }
 
         return null;
@@ -45,12 +48,13 @@ public abstract class BaseDao {
     public <T> List<T> queryForList(Class<T> type, String sql, Object... params) {
 
         Connection conn = JDBCUtils.getConnection();
-        BeanListHandler<T> beanListHandler = new BeanListHandler<T>(type);
 
         try {
-            return runner.query(conn, sql, beanListHandler, params);
+            return runner.query(conn, sql, new BeanListHandler<T>(type), params);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtils.close(conn);
         }
 
         return null;
@@ -59,12 +63,13 @@ public abstract class BaseDao {
     public <T> Object queryForSingleValue(String sql, Object... params) {
 
         Connection conn = JDBCUtils.getConnection();
-        ScalarHandler<T> ScalarHandler = new ScalarHandler<T>();
 
         try {
-            return runner.query(conn, sql, ScalarHandler, params);
+            return runner.query(conn, sql, new ScalarHandler<T>(), params);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtils.close(conn);
         }
 
         return null;

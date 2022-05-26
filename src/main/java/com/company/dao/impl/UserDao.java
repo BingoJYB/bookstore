@@ -21,7 +21,7 @@ public class UserDao extends BaseDao implements IUserDao {
 
     public int saveUser(User user) {
 
-        String query = "INSERT INTO t_user('username', 'password', 'email') VALUES (?, ?, ?)";
+        String query = "INSERT INTO t_user (username, password, email) VALUES (?, ?, ?)";
 
         return update(query, user.getUsername(), user.getPassword(), user.getEmail());
     }

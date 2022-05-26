@@ -15,6 +15,8 @@ public class JDBCUtilsTest {
         Connection conn = JDBCUtils.getConnection();
 
         assertNotNull(conn);
+
+        JDBCUtils.close(conn);
     }
 
 }
