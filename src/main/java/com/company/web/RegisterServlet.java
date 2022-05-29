@@ -19,8 +19,12 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String code = request.getParameter("code");
 
+        request.setAttribute("username", username);
+        request.setAttribute("email", email);
+
         if (code == null) {
 
+            request.setAttribute("msg", "验证码错误");
             request.getRequestDispatcher("/pages/user/register.jsp").forward(request, response);
         } else {
 
@@ -29,6 +33,7 @@ public class RegisterServlet extends HttpServlet {
 
             if (userService.registerUser(user) == -1) {
 
+                request.setAttribute("msg", "注册失败");
                 request.getRequestDispatcher("/pages/user/register.jsp").forward(request, response);
             } else {
 

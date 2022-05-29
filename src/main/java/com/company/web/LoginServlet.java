@@ -22,6 +22,8 @@ public class LoginServlet extends HttpServlet {
 
         if (user == null) {
 
+            request.setAttribute("username", username);
+            request.setAttribute("msg", "用户名或密码错误");
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
         } else {
 
