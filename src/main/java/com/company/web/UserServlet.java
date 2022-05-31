@@ -3,26 +3,13 @@ package com.company.web;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.company.entity.User;
 import com.company.service.impl.UserService;
-import com.company.utils.Constants;
 
-public class UserServlet extends HttpServlet {
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String action = request.getParameter(Constants.USER_ACTION_KEY);
-
-        if (action.equals(Constants.USER_LOGIN)) {
-            login(request, response);
-        } else {
-            register(request, response);
-        }
-    }
+public class UserServlet extends BaseServlet {
 
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

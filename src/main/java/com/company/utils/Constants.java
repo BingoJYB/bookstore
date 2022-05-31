@@ -6,8 +6,6 @@ public class Constants {
     public static final String BOOKSTORE_DB_PROPS = "bookstore_db.properties";
 
     // User
-    public static final String USER_ACTION_KEY = "action";
-    public static final String USER_REGISTER = "register";
-    public static final String USER_LOGIN = "login";
+    public static final String USER_METHOD_KEY = "method";
 
 }
