@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
+  <!DOCTYPE html>
+  <html>
+
   <head>
     <meta charset="UTF-8" />
     <title>后台管理</title>
@@ -12,6 +13,7 @@
       }
     </style>
   </head>
+
   <body>
     <div id="header">
       <img class="logo_img" alt="" src="static/img/logo.gif" />
@@ -25,4 +27,5 @@
 
     <jsp:include page="../../public/bottom.jsp"></jsp:include>
   </body>
-</html>
+
+  </html>

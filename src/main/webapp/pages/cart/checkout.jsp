@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
+  <!DOCTYPE html>
+  <html>
+
   <head>
     <meta charset="UTF-8" />
     <title>结算页面</title>
@@ -12,6 +13,7 @@
       }
     </style>
   </head>
+
   <body>
     <div id="header">
       <img class="logo_img" alt="" src="static/img/logo.gif" />
@@ -27,4 +29,5 @@
       <span> 尚硅谷书城.Copyright &copy;2015 </span>
     </div>
   </body>
-</html>
+
+  </html>

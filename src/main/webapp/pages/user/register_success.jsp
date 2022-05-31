@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
+  <!DOCTYPE html>
+  <html>
+
   <head>
     <meta charset="UTF-8" />
     <title>尚硅谷会员注册页面</title>
@@ -16,6 +17,7 @@
       }
     </style>
   </head>
+
   <body>
     <jsp:include page="../../public/user-header.jsp"></jsp:include>
 
@@ -25,4 +27,5 @@
 
     <jsp:include page="../../public/bottom.jsp"></jsp:include>
   </body>
-</html>
+
+  </html>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
+  <!DOCTYPE html>
+  <html>
+
   <head>
     <meta charset="UTF-8" />
     <title>尚硅谷会员注册页面</title>
@@ -15,7 +16,7 @@
         $("input[name='username']").blur(function () {
           $.get(
             "UserServlet?method=cheekUser&username=" +
-              $("input[name='username']").val(),
+            $("input[name='username']").val(),
             function (data) {
               $(".errorMsg").text(data);
             }
@@ -66,6 +67,7 @@
       }
     </style>
   </head>
+
   <body>
     <div id="login_header">
       <img class="logo_img" alt="" src="static/img/logo.gif" />
@@ -81,70 +83,42 @@
           <div class="login_box">
             <div class="tit">
               <h1>注册尚硅谷会员</h1>
-              <span class="errorMsg"
-                ><%= request.getAttribute("msg") == null ? "" :
-                request.getAttribute("msg") %></span
-              >
+              <span class="errorMsg">
+                <%= request.getAttribute("msg")==null ? "" : request.getAttribute("msg") %>
+              </span>
             </div>
             <div class="form">
               <form action="RegisterServlet" method="post">
                 <input type="hidden" name="method" value="register" />
                 <label>用户名称：</label>
-                <input class="itxt" type="text" placeholder="请输入用户名"
-                autocomplete="off" tabindex="1" name="username" id="username"
-                value="<%= request.getAttribute("username") == null ? "" :
-                request.getAttribute("username") %>"/>
+                <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username"
+                  id="username" value="<%= request.getAttribute(" username")==null ? "" :
+                  request.getAttribute("username") %>"/>
                 <br />
                 <br />
                 <label>用户密码：</label>
-                <input
-                  class="itxt"
-                  type="password"
-                  placeholder="请输入密码"
-                  autocomplete="off"
-                  tabindex="1"
-                  name="password"
-                  id="password"
-                />
+                <input class="itxt" type="password" placeholder="请输入密码" autocomplete="off" tabindex="1" name="password"
+                  id="password" />
                 <br />
                 <br />
                 <label>确认密码：</label>
-                <input
-                  class="itxt"
-                  type="password"
-                  placeholder="确认密码"
-                  autocomplete="off"
-                  tabindex="1"
-                  name="repwd"
-                  id="repwd"
-                />
+                <input class="itxt" type="password" placeholder="确认密码" autocomplete="off" tabindex="1" name="repwd"
+                  id="repwd" />
                 <br />
                 <br />
                 <label>电子邮件：</label>
-                <input class="itxt" type="text" placeholder="请输入邮箱地址"
-                autocomplete="off" tabindex="1" name="email" id="email"
-                value="<%= request.getAttribute("email") == null ? "" :
-                request.getAttribute("email") %>" />
+                <input class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off" tabindex="1" name="email"
+                  id="email" value="<%= request.getAttribute(" email")==null ? "" : request.getAttribute("email") %>" />
                 <br />
                 <br />
                 <label>验证码：</label>
-                <input
-                  class="itxt"
-                  type="text"
-                  style="width: 120px"
-                  name="code"
-                />
-                <img
-                  alt=""
-                  src="code.jpg"
-                  id="codeImg"
-                  style="
+                <input class="itxt" type="text" style="width: 120px" name="code" />
+                <img alt="" src="code.jpg" id="codeImg" style="
                     float: right;
                     margin-right: 40px;
                     width: 100px;
                     height: 40px;
-                  "
-                />
+                  " />
                 <br />
                 <br />
                 <input type="submit" value="注册" id="sub_btn" />
@@ -156,4 +130,5 @@
     </div>
     <jsp:include page="../../public/bottom.jsp"></jsp:include>
   </body>
-</html>
+
+  </html>
