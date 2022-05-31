@@ -163,7 +163,7 @@ h1 {
 }
 
 .msg_cont b {
-    background: url("pwd-icons-new.png") no-repeat scroll -104px -22px rgba(0, 0, 0, 0);
+    background: url("../img/pwd-icons-new.png") no-repeat scroll -104px -22px rgba(0, 0, 0, 0);
     display: block;
     height: 17px;
     left: 10px;
