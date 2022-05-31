@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.company.entity.User;
 import com.company.service.impl.UserService;
+import com.company.utils.WebUtils;
 
 public class UserServlet extends BaseServlet {
 
-    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -30,23 +31,25 @@ public class UserServlet extends BaseServlet {
         }
     }
 
-    private void register(HttpServletRequest request, HttpServletResponse response)
+    void register(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        User user = new User();
         UserService userService = new UserService();
 
-        User user = userService.login(username, password);
+        WebUtils.mapParam2Bean(request, user);
 
-        if (user == null) {
+        int returnCode = userService.registerUser(user);
 
-            request.setAttribute("username", username);
-            request.setAttribute("msg", "用户名或密码错误");
-            request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
+        if (returnCode == -1) {
+
+            request.setAttribute("username", request.getParameter("username"));
+            request.setAttribute("email", request.getParameter("email"));
+            request.setAttribute("msg", "用户名已存在");
+            request.getRequestDispatcher("/pages/user/register.jsp").forward(request, response);
         } else {
 
-            request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/user/register_success.jsp").forward(request, response);
         }
     }
 
