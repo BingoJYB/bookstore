@@ -7,21 +7,12 @@
   <display-name>Bookstore Web Application</display-name>
 
   <servlet>
-    <servlet-name>RegisterServlet</servlet-name>
-    <servlet-class>com.company.web.RegisterServlet</servlet-class>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.company.web.UserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RegisterServlet</servlet-name>
-    <url-pattern>/RegisterServlet</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.company.web.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/userServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

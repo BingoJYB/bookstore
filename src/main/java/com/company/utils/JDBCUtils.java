@@ -18,7 +18,7 @@ public class JDBCUtils {
     static {
         try {
             props = new Properties();
-            props.load(JDBCUtils.class.getClassLoader().getResourceAsStream(JDBCConstants.BOOKSTORE_DB_PROPS));
+            props.load(JDBCUtils.class.getClassLoader().getResourceAsStream(Constants.BOOKSTORE_DB_PROPS));
 
             driver = props.getProperty("jdbc.driver");
 
