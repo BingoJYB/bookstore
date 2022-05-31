@@ -19,14 +19,6 @@ public class UserDaoTest {
     }
 
     @Test
-    public void testDeleteUser() {
-
-        User user = new User(null, "admin", "123", "admin@gmail.com");
-
-        assertNotEquals(-1, userDao.deleteUser(user));
-    }
-
-    @Test
     public void testSaveUser() {
 
         User user = new User(null, "admin", "123", "admin@gmail.com");
@@ -45,4 +37,13 @@ public class UserDaoTest {
 
         assertNotNull(userDao.getUserByUsernameAndPassword("admin", "123"));
     }
+
+    @Test
+    public void testDeleteUser() {
+
+        User user = new User(null, "admin", "123", "admin@gmail.com");
+
+        assertNotEquals(-1, userDao.deleteUser(user));
+    }
+
 }

@@ -24,16 +24,6 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testDeregisterUser() {
-
-        User user = new User(null, "Iron Man", "321", "man.iron@gmail.com");
-
-        userService.deregisterUser(user);
-
-        assertNull(userDao.getUserByUsername(user.getUsername()));
-    }
-
-    @Test
     public void testRegisterUser() {
 
         User user = new User(null, "Iron Man", "321", "man.iron@gmail.com");
@@ -54,6 +44,16 @@ public class UserServiceTest {
 
         assertTrue(userService.isUsernameDuplicated("Iron Man"));
         assertFalse(userService.isUsernameDuplicated("Batman"));
+    }
+
+    @Test
+    public void testDeregisterUser() {
+
+        User user = new User(null, "Iron Man", "321", "man.iron@gmail.com");
+
+        userService.deregisterUser(user);
+
+        assertNull(userDao.getUserByUsername(user.getUsername()));
     }
 
 }
