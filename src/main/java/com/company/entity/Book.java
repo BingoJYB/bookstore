@@ -8,7 +8,7 @@ public class Book {
     private String author;
     private Integer sales;
     private Integer stock;
-    private String imgPath;
+    private String imgPath = "static/img/default.jpg";
 
     public Book(Integer id, String name, Double price, String author, Integer sales, Integer stock, String imgPath) {
 
