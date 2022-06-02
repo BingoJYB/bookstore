@@ -1,3 +1,4 @@
+<%@ page isELIgnored="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
   <!DOCTYPE html>
   <html>
@@ -84,7 +85,7 @@
             <div class="tit">
               <h1>注册尚硅谷会员</h1>
               <span class="errorMsg">
-                <%= request.getAttribute("msg")==null ? "" : request.getAttribute("msg") %>
+                ${ requestScope.msg }
               </span>
             </div>
             <div class="form">
@@ -92,8 +93,7 @@
                 <input type="hidden" name="method" value="register" />
                 <label>用户名称：</label>
                 <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username"
-                  id="username" value="<%= request.getAttribute("username")==null ? "" :
-                  request.getAttribute("username") %>"/>
+                  id="username" value="${ requestScope.username }" />
                 <br />
                 <br />
                 <label>用户密码：</label>
@@ -108,7 +108,7 @@
                 <br />
                 <label>电子邮件：</label>
                 <input class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off" tabindex="1" name="email"
-                  id="email" value="<%= request.getAttribute("email")==null ? "" : request.getAttribute("email") %>" />
+                  id="email" value="${ requestScope.email }" />
                 <br />
                 <br />
                 <label>验证码：</label>

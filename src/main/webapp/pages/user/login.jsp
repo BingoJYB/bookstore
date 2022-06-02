@@ -1,3 +1,4 @@
+<%@ page isELIgnored="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
   <!DOCTYPE html>
   <html>
@@ -41,7 +42,7 @@
             <div class="msg_cont">
               <b></b>
               <span class="errorMsg">
-                <%= request.getAttribute("msg")==null ?"请输入用户名和密码" : request.getAttribute("msg") %>
+                ${ empty requestScope.msg ? "请输入用户名和密码" : requestScope.msg }
               </span>
             </div>
             <div class="form">
@@ -49,7 +50,7 @@
                 <input type="hidden" name="method" value="login" />
                 <label>用户名称：</label>
                 <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username"
-                  value="<%= request.getAttribute("username")==null ? "" : request.getAttribute("username") %>" />
+                  value="${ requestScope.username }" />
                 <br />
                 <br />
                 <label>用户密码：</label>
