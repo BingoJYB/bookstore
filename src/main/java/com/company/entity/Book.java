@@ -18,7 +18,7 @@ public class Book {
         this.author = author;
         this.sales = sales;
         this.stock = stock;
-        this.imgPath = imgPath;
+        setImgPath(imgPath);
     }
 
     public Integer getId() {
@@ -74,7 +74,10 @@ public class Book {
     }
 
     public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
+
+        if (imgPath != null && imgPath.length() > 0) {
+            this.imgPath = imgPath;
+        }
     }
 
     public String toString() {
