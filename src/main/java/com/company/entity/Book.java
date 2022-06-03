@@ -1,16 +1,19 @@
 package com.company.entity;
 
+import java.math.BigDecimal;
+
 public class Book {
 
     private Integer id;
     private String name;
-    private Double price;
+    private BigDecimal price;
     private String author;
     private Integer sales;
     private Integer stock;
     private String imgPath = "static/img/default.jpg";
 
-    public Book(Integer id, String name, Double price, String author, Integer sales, Integer stock, String imgPath) {
+    public Book(Integer id, String name, BigDecimal price, String author, Integer sales, Integer stock,
+            String imgPath) {
 
         this.id = id;
         this.name = name;
@@ -19,6 +22,10 @@ public class Book {
         this.sales = sales;
         this.stock = stock;
         setImgPath(imgPath);
+    }
+
+    public Book() {
+
     }
 
     public Integer getId() {
@@ -37,11 +44,11 @@ public class Book {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

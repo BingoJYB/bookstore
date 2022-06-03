@@ -6,11 +6,11 @@ import com.company.entity.Book;
 
 public interface IBookDao {
 
-    public void addBook(Book book);
+    public int addBook(Book book);
 
-    public void deleteBookByID(Integer id);
+    public int deleteBookByID(Integer id);
 
-    public void updateBook(Book book);
+    public int updateBook(Book book);
 
     public Book queryBookByID(Integer id);
 
