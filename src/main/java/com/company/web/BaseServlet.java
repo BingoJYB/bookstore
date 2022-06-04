@@ -13,6 +13,11 @@ import com.company.utils.Constants;
 
 public abstract class BaseServlet extends HttpServlet {
 
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        doPost(request, response);
+    }
+
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {

@@ -1,3 +1,4 @@
+<%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <!DOCTYPE html>
@@ -37,9 +38,9 @@
             <td colspan="2">操作</td>
           </tr>
 
-          <c:forEach items="${page.pageData}" var="book">
+          <c:forEach items="${requestScope.books}" var="book">
             <tr>
-              <td>${book.title}</td>
+              <td>${book.name}</td>
               <td>￥${book.price}</td>
               <td>${book.author}</td>
               <td>${book.sales}</td>

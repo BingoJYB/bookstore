@@ -12,11 +12,12 @@ import com.company.utils.WebUtils;
 
 public class UserServlet extends BaseServlet {
 
+    private UserService userService = new UserService();
+
     void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        UserService userService = new UserService();
 
         User user = userService.login(username, password);
 
@@ -35,7 +36,6 @@ public class UserServlet extends BaseServlet {
             throws ServletException, IOException {
 
         User user = new User();
-        UserService userService = new UserService();
 
         WebUtils.mapParam2Bean(request, user);
 
