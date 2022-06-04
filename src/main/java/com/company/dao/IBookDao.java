@@ -14,5 +14,5 @@ public interface IBookDao {
 
     public Book queryBookByID(Integer id);
 
-    public List<Book> queryBook();
+    public List<Book> queryBooks();
 }

@@ -47,9 +47,9 @@ public class BookDaoTest {
     }
 
     @Test
-    public void testQueryBook() {
+    public void testQueryBooks() {
 
-        List<Book> books = bookDao.queryBook();
+        List<Book> books = bookDao.queryBooks();
 
         assertTrue(books.size() > 0);
     }
