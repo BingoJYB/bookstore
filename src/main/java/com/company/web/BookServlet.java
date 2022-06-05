@@ -38,4 +38,16 @@ public class BookServlet extends BaseServlet {
         }
     }
 
+    public void deleteBook(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Integer id = Integer.parseInt(request.getParameter("id"));
+
+        int returnCode = bookService.deleteBookByID(id);
+
+        if (returnCode != -1) {
+            response.sendRedirect(request.getContextPath() + "/manager/BookServlet?method=list");
+        }
+    }
+
 }

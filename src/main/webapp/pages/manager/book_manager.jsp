@@ -48,7 +48,7 @@
               <td>
                 <a href="manager/BookServlet?method=getBook&pageNow=${page.pageNow}&id=${book.id}">修改</a>
               </td>
-              <td><a href="manager/BookServlet?method=delete&id=${book.id}">删除</a></td>
+              <td><a href="manager/BookServlet?method=deleteBook&id=${book.id}">删除</a></td>
             </tr>
           </c:forEach>
           <tr>
