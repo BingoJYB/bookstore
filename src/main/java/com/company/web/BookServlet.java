@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.company.entity.Book;
 import com.company.service.impl.BookService;
+import com.company.utils.WebUtils;
 
 public class BookServlet extends BaseServlet {
 
@@ -22,6 +23,18 @@ public class BookServlet extends BaseServlet {
 
             request.setAttribute("books", books);
             request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request, response);
+        }
+    }
+
+    public void addBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Book book = new Book();
+        WebUtils.mapParam2Bean(request, book);
+
+        int returnCode = bookService.addBook(book);
+
+        if (returnCode != -1) {
+            response.sendRedirect(request.getContextPath() + "/manager/BookServlet?method=list");
         }
     }
 

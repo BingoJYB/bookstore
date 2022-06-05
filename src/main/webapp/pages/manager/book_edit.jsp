@@ -1,3 +1,4 @@
+<%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 		<!DOCTYPE html>
@@ -31,7 +32,7 @@
 			</div>
 
 			<div id="main">
-				<form action="BookServlet" method="post">
+				<form action="manager/BookServlet" method="post">
 					<c:if test="${empty book}">
 						<input name="method" type="hidden" value="addBook">
 					</c:if>
@@ -50,7 +51,7 @@
 							<td colspan="2">操作</td>
 						</tr>
 						<tr>
-							<td><input name="title" type="text" value="${book.title}" /></td>
+							<td><input name="name" type="text" value="${book.name}" /></td>
 							<td><input name="price" type="text" value="${book.price}" /></td>
 							<td><input name="author" type="text" value="${book.author}" /></td>
 							<td><input name="sales" type="text" value="${book.sales}" /></td>
