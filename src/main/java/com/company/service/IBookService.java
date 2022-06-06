@@ -3,6 +3,7 @@ package com.company.service;
 import java.util.List;
 
 import com.company.entity.Book;
+import com.company.entity.Page;
 
 public interface IBookService {
 
@@ -15,4 +16,7 @@ public interface IBookService {
     public Book queryBookByID(Integer id);
 
     public List<Book> queryBooks();
+
+    public Page getPage(int pageNow, int pageSize);
+
 }

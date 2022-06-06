@@ -49,4 +49,20 @@ public class BookDao extends BaseDao implements IBookDao {
         return queryForList(Book.class, query);
     }
 
+    @Override
+    public long getTotalItemSize() {
+
+        String query = "SELECT COUNT(*) FROM t_book";
+
+        return queryForSingleValue(query);
+    }
+
+    @Override
+    public List<Book> getItemsPerPage(int pageNow, int pageSize) {
+
+        String query = "SELECT * FROM t_book LIMIT ?, ?";
+
+        return queryForList(Book.class, query, (pageNow - 1) * pageSize, pageSize);
+    }
+
 }

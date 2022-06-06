@@ -32,7 +32,7 @@
 			</div>
 
 			<div id="main">
-				<form action="manager/BookServlet" method="post">
+				<form action="BookServlet" method="post">
 					<c:if test="${empty book}">
 						<input name="method" type="hidden" value="addBook">
 					</c:if>

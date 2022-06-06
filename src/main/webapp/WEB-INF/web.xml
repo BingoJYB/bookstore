@@ -21,7 +21,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>BookServlet</servlet-name>
-    <url-pattern>/manager/BookServlet</url-pattern>
+    <url-pattern>/BookServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

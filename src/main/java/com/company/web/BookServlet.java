@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.company.entity.Book;
+import com.company.entity.Page;
 import com.company.service.impl.BookService;
+import com.company.utils.Constants;
 import com.company.utils.WebUtils;
 
 public class BookServlet extends BaseServlet {
@@ -35,7 +37,7 @@ public class BookServlet extends BaseServlet {
 
         if (returnCode != -1) {
 
-            response.sendRedirect(request.getContextPath() + "/manager/BookServlet?method=list");
+            response.sendRedirect(request.getContextPath() + "/BookServlet?method=list");
         }
     }
 
@@ -48,7 +50,7 @@ public class BookServlet extends BaseServlet {
 
         if (returnCode != -1) {
 
-            response.sendRedirect(request.getContextPath() + "/manager/BookServlet?method=list");
+            response.sendRedirect(request.getContextPath() + "/BookServlet?method=list");
         }
     }
 
@@ -71,13 +73,44 @@ public class BookServlet extends BaseServlet {
 
         Book book = new Book();
         WebUtils.mapParam2Bean(request, book);
-        Integer id = Integer.parseInt(request.getParameter("id"));
 
         int returnCode = bookService.updateBook(book);
 
         if (returnCode != -1) {
 
-            response.sendRedirect(request.getContextPath() + "/manager/BookServlet?method=list");
+            response.sendRedirect(request.getContextPath() + "/BookServlet?method=list");
+        }
+    }
+
+    public void getAllManagerAfter(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Integer pageNow = WebUtils.parseInt(request.getParameter("pageNow"), 1);
+        Integer pageSize = WebUtils.parseInt(request.getParameter("pageSize"), Constants.DEFAULT_PAGE_SIZE);
+
+        Page page = bookService.getPage(pageNow, pageSize);
+
+        if (page != null) {
+
+            request.setAttribute("page", page);
+            request.setAttribute("url", Constants.MANAGER_PAGING_URL);
+            request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request, response);
+        }
+    }
+
+    public void getAllHomeAfter(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Integer pageNow = WebUtils.parseInt(request.getParameter("pageNow"), 1);
+        Integer pageSize = WebUtils.parseInt(request.getParameter("pageSize"), Constants.DEFAULT_PAGE_SIZE);
+
+        Page page = bookService.getPage(pageNow, pageSize);
+
+        if (page != null) {
+
+            request.setAttribute("page", page);
+            request.setAttribute("url", Constants.HOME_PAGING_URL);
+            request.getRequestDispatcher("/pages/user/home.jsp").forward(request, response);
         }
     }
 

@@ -60,7 +60,7 @@ public abstract class BaseDao {
         return null;
     }
 
-    public <T> Object queryForSingleValue(String sql, Object... params) {
+    public <T> T queryForSingleValue(String sql, Object... params) {
 
         Connection conn = JDBCUtils.getConnection();
 

@@ -8,4 +8,13 @@ public class Constants {
     // User
     public static final String USER_METHOD_KEY = "method";
 
+    // Page
+    public static final int DEFAULT_PAGE_SIZE = 4;
+
+    // Manager
+    public static final String MANAGER_PAGING_URL = "BookServlet?method=getAllManagerAfter&pageNow=";
+
+    // Home
+    public static final String HOME_PAGING_URL = "BookServlet?method=getAllHomeAfter&pageNow=";
+
 }

@@ -18,4 +18,14 @@ public class WebUtils {
             e.printStackTrace();
         }
     }
+
+    public static Integer parseInt(String numberInStr, Integer defaultVal) {
+
+        try {
+            return Integer.parseInt(numberInStr);
+        } catch (NumberFormatException e) {
+            return defaultVal;
+        }
+    }
+
 }
