@@ -34,6 +34,7 @@ public class BookServlet extends BaseServlet {
         int returnCode = bookService.addBook(book);
 
         if (returnCode != -1) {
+
             response.sendRedirect(request.getContextPath() + "/manager/BookServlet?method=list");
         }
     }
@@ -46,6 +47,36 @@ public class BookServlet extends BaseServlet {
         int returnCode = bookService.deleteBookByID(id);
 
         if (returnCode != -1) {
+
+            response.sendRedirect(request.getContextPath() + "/manager/BookServlet?method=list");
+        }
+    }
+
+    public void getBook(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Integer id = Integer.parseInt(request.getParameter("id"));
+
+        Book book = bookService.queryBookByID(id);
+
+        if (book != null) {
+
+            request.setAttribute("book", book);
+            request.getRequestDispatcher("/pages/manager/book_edit.jsp").forward(request, response);
+        }
+    }
+
+    public void updateBook(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Book book = new Book();
+        WebUtils.mapParam2Bean(request, book);
+        Integer id = Integer.parseInt(request.getParameter("id"));
+
+        int returnCode = bookService.updateBook(book);
+
+        if (returnCode != -1) {
+
             response.sendRedirect(request.getContextPath() + "/manager/BookServlet?method=list");
         }
     }

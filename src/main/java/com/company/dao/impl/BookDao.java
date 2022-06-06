@@ -36,7 +36,7 @@ public class BookDao extends BaseDao implements IBookDao {
     @Override
     public Book queryBookByID(Integer id) {
 
-        String query = "SELECT name, price, author, sales, stock, img_path imgPath FROM t_book WHERE id = ?";
+        String query = "SELECT id, name, price, author, sales, stock, img_path imgPath FROM t_book WHERE id = ?";
 
         return queryForOne(Book.class, query, id);
     }

@@ -37,7 +37,7 @@
 						<input name="method" type="hidden" value="addBook">
 					</c:if>
 					<c:if test="${!empty book}">
-						<input name="method" type="hidden" value="updateOne">
+						<input name="method" type="hidden" value="updateBook">
 						<input name="pageNow" type="hidden" value="${pageNow}">
 						<input type="hidden" name="id" value="${book.id}">
 					</c:if>
