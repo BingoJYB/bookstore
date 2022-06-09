@@ -1,5 +1,6 @@
 package com.company.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.company.entity.Book;
@@ -19,4 +20,8 @@ public interface IBookDao {
     public long getTotalItemSize();
 
     public List<Book> getItemsPerPage(int pageNow, int pageSize);
+
+    public long getTotalItemSizeByPrice(BigDecimal min, BigDecimal max);
+
+    public List<Book> getItemsPerPageByPrice(int pageNow, int pageSize, BigDecimal min, BigDecimal max);
 }

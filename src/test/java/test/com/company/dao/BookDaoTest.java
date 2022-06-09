@@ -68,6 +68,19 @@ public class BookDaoTest {
     }
 
     @Test
+    public void testGetTotalItemSizeByPrice() {
+
+        assertEquals(2, bookDao.getTotalItemSizeByPrice(new BigDecimal(1.0), new BigDecimal(20.0)));
+    }
+
+    @Test
+    public void testGetItemsPerPageByPrice() {
+
+        List<Book> books = bookDao.getItemsPerPageByPrice(1, 2, new BigDecimal(1.0), new BigDecimal(20.0));
+        assertEquals(2, books.size());
+    }
+
+    @Test
     public void testDeleteBookByID() {
 
         assertNotEquals(-1, bookDao.deleteBookByID(1));

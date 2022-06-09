@@ -1,6 +1,7 @@
 package com.company.web;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,7 +23,6 @@ public class BookServlet extends BaseServlet {
         List<Book> books = bookService.queryBooks();
 
         if (books != null) {
-
             request.setAttribute("books", books);
             request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request, response);
         }
@@ -36,7 +36,6 @@ public class BookServlet extends BaseServlet {
         int returnCode = bookService.addBook(book);
 
         if (returnCode != -1) {
-
             response.sendRedirect(request.getContextPath() + "/BookServlet?method=list");
         }
     }
@@ -49,7 +48,6 @@ public class BookServlet extends BaseServlet {
         int returnCode = bookService.deleteBookByID(id);
 
         if (returnCode != -1) {
-
             response.sendRedirect(request.getContextPath() + "/BookServlet?method=list");
         }
     }
@@ -62,7 +60,6 @@ public class BookServlet extends BaseServlet {
         Book book = bookService.queryBookByID(id);
 
         if (book != null) {
-
             request.setAttribute("book", book);
             request.getRequestDispatcher("/pages/manager/book_edit.jsp").forward(request, response);
         }
@@ -77,7 +74,6 @@ public class BookServlet extends BaseServlet {
         int returnCode = bookService.updateBook(book);
 
         if (returnCode != -1) {
-
             response.sendRedirect(request.getContextPath() + "/BookServlet?method=list");
         }
     }
@@ -91,7 +87,6 @@ public class BookServlet extends BaseServlet {
         Page page = bookService.getPage(pageNow, pageSize);
 
         if (page != null) {
-
             request.setAttribute("page", page);
             request.setAttribute("url", Constants.MANAGER_PAGING_URL);
             request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request, response);
@@ -107,9 +102,44 @@ public class BookServlet extends BaseServlet {
         Page page = bookService.getPage(pageNow, pageSize);
 
         if (page != null) {
-
             request.setAttribute("page", page);
-            request.setAttribute("url", Constants.HOME_PAGING_URL);
+        }
+
+        request.setAttribute("url", Constants.HOME_PAGING_URL);
+        request.getRequestDispatcher("/pages/user/home.jsp").forward(request, response);
+    }
+
+    public void getAllHomeByPrice(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        BigDecimal min;
+        BigDecimal max;
+
+        Integer pageNow = WebUtils.parseInt(request.getParameter("pageNow"), 1);
+        Integer pageSize = WebUtils.parseInt(request.getParameter("pageSize"), Constants.DEFAULT_PAGE_SIZE);
+        String minStr = request.getParameter("min");
+        String maxStr = request.getParameter("max");
+
+        if (minStr.isEmpty()) {
+            min = new BigDecimal(0.0);
+        } else {
+            min = new BigDecimal(minStr);
+        }
+
+        if (maxStr.isEmpty()) {
+            max = new BigDecimal(Integer.MAX_VALUE);
+        } else {
+            max = new BigDecimal(maxStr);
+        }
+
+        Page page = bookService.getPageByPrice(pageNow, pageSize, min, max);
+        StringBuilder enhancedUrl = new StringBuilder(Constants.HOME_PAGING_BY_PRICE_URL);
+        enhancedUrl.append("&min=").append(min.toString());
+        enhancedUrl.append("&max=").append(max.toString());
+
+        if (page != null) {
+            request.setAttribute("page", page);
+            request.setAttribute("url", enhancedUrl.toString());
             request.getRequestDispatcher("/pages/user/home.jsp").forward(request, response);
         }
     }

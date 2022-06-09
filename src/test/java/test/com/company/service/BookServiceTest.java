@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.company.entity.Book;
+import com.company.entity.Page;
 import com.company.service.impl.BookService;
 
 public class BookServiceTest {
@@ -52,6 +53,24 @@ public class BookServiceTest {
         List<Book> books = bookService.queryBooks();
 
         assertTrue(books.size() > 0);
+    }
+
+    @Test
+    public void testGetPage() {
+
+        Page page = bookService.getPage(1, 1);
+
+        assertEquals(5, page.getTotalCount());
+        assertEquals(5, page.getTotalPages());
+    }
+
+    @Test
+    public void testGetPageByPrice() {
+
+        Page page = bookService.getPageByPrice(1, 1, new BigDecimal(1.0), new BigDecimal(20.0));
+
+        assertEquals(2, page.getTotalCount());
+        assertEquals(2, page.getTotalPages());
     }
 
     @Test

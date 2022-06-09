@@ -1,5 +1,6 @@
 package com.company.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.company.entity.Book;
@@ -18,5 +19,7 @@ public interface IBookService {
     public List<Book> queryBooks();
 
     public Page getPage(int pageNow, int pageSize);
+
+    public Page getPageByPrice(int pageNow, int pageSize, BigDecimal min, BigDecimal max);
 
 }

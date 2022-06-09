@@ -1,5 +1,6 @@
 package com.company.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.company.dao.impl.BookDao;
@@ -48,6 +49,17 @@ public class BookService implements IBookService {
         int totalPages = (totalCount + pageSize - 1) / pageSize;
         Page page = new Page(pageNow, totalPages, totalCount, pageSize, null);
         page.setItems(bookDao.getItemsPerPage(pageNow, pageSize));
+
+        return page;
+    }
+
+    @Override
+    public Page getPageByPrice(int pageNow, int pageSize, BigDecimal min, BigDecimal max) {
+
+        int totalCount = (int) bookDao.getTotalItemSizeByPrice(min, max);
+        int totalPages = (totalCount + pageSize - 1) / pageSize;
+        Page page = new Page(pageNow, totalPages, totalCount, pageSize, null);
+        page.setItems(bookDao.getItemsPerPageByPrice(pageNow, pageSize, min, max));
 
         return page;
     }

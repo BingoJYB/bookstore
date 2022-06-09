@@ -12,9 +12,10 @@ public class Constants {
     public static final int DEFAULT_PAGE_SIZE = 4;
 
     // Manager
-    public static final String MANAGER_PAGING_URL = "BookServlet?method=getAllManagerAfter&pageNow=";
+    public static final String MANAGER_PAGING_URL = "BookServlet?method=getAllManagerAfter";
 
     // Home
-    public static final String HOME_PAGING_URL = "BookServlet?method=getAllHomeAfter&pageNow=";
+    public static final String HOME_PAGING_URL = "BookServlet?method=getAllHomeAfter";
+    public static final String HOME_PAGING_BY_PRICE_URL = "BookServlet?method=getAllHomeByPrice";
 
 }

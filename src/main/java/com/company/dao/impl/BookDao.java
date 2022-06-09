@@ -1,5 +1,6 @@
 package com.company.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.company.dao.IBookDao;
@@ -63,6 +64,22 @@ public class BookDao extends BaseDao implements IBookDao {
         String query = "SELECT * FROM t_book LIMIT ?, ?";
 
         return queryForList(Book.class, query, (pageNow - 1) * pageSize, pageSize);
+    }
+
+    @Override
+    public long getTotalItemSizeByPrice(BigDecimal min, BigDecimal max) {
+
+        String query = "SELECT COUNT(*) FROM t_book WHERE price BETWEEN ? AND ?";
+
+        return queryForSingleValue(query, min, max);
+    }
+
+    @Override
+    public List<Book> getItemsPerPageByPrice(int pageNow, int pageSize, BigDecimal min, BigDecimal max) {
+
+        String query = "SELECT * FROM t_book WHERE price BETWEEN ? AND ? LIMIT ?, ?";
+
+        return queryForList(Book.class, query, min, max, (pageNow - 1) * pageSize, pageSize);
     }
 
 }
