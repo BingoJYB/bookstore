@@ -28,6 +28,7 @@ public class UserServlet extends BaseServlet {
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
         } else {
 
+            request.getSession().setAttribute("user", user);
             request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request, response);
         }
     }
