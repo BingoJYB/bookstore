@@ -22,12 +22,10 @@ public class UserServlet extends BaseServlet {
         User user = userService.login(username, password);
 
         if (user == null) {
-
             request.setAttribute("username", username);
             request.setAttribute("msg", "用户名或密码错误");
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
         } else {
-
             request.getSession().setAttribute("user", user);
             request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request, response);
         }
@@ -36,21 +34,30 @@ public class UserServlet extends BaseServlet {
     void register(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        User user = new User();
+        String codeInSession = (String) request.getSession().getAttribute("KAPTCHA_SESSION_KEY");
+        request.getSession().removeAttribute("KAPTCHA_SESSION_KEY");
 
+        User user = new User();
         WebUtils.mapParam2Bean(request, user);
 
-        int returnCode = userService.registerUser(user);
+        String code = request.getParameter("code");
 
-        if (returnCode == -1) {
+        if (code.equals(codeInSession)) {
+            int returnCode = userService.registerUser(user);
 
+            if (returnCode == -1) {
+                request.setAttribute("username", request.getParameter("username"));
+                request.setAttribute("email", request.getParameter("email"));
+                request.setAttribute("msg", "用户名已存在");
+                request.getRequestDispatcher("/pages/user/register.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("/pages/user/register_success.jsp").forward(request, response);
+            }
+        } else {
             request.setAttribute("username", request.getParameter("username"));
             request.setAttribute("email", request.getParameter("email"));
-            request.setAttribute("msg", "用户名已存在");
+            request.setAttribute("msg", "验证码不一致");
             request.getRequestDispatcher("/pages/user/register.jsp").forward(request, response);
-        } else {
-
-            request.getRequestDispatcher("/pages/user/register_success.jsp").forward(request, response);
         }
     }
 
