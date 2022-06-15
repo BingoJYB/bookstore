@@ -33,4 +33,13 @@
     <url-pattern>/code.jpg</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>CartServlet</servlet-name>
+    <servlet-class>com.company.web.CartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartServlet</servlet-name>
+    <url-pattern>/CartServlet</url-pattern>
+  </servlet-mapping>
+
 </web-app>

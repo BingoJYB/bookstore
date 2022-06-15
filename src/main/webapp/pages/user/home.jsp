@@ -18,12 +18,13 @@
             });
             $(".btn_add").click(function () {
               $.getJSON(
-                "CartServlet?method=add&id=" + $(this).attr("addid"),
+                "CartServlet?method=addItem&id=" + $(this).attr("addid"),
                 function (data) {
                   $("#totalCount").text(data.total);
                   $("#title").text("您刚刚将【" + data.name + "】加入购物车");
                 }
               );
+              location.reload();
             });
           });
         </script>
@@ -75,7 +76,8 @@
                     <span class="sp2">${book.stock}</span>
                   </div>
                   <div class="book_add">
-                    <button addid="${book.id}" class="btn_add">加入购物车</button>
+                    <button addid="${book.id}" class="btn_add"
+                      style="margin: 6px 1px; font-size: 12px;">加入购物车</button>
                   </div>
                 </div>
               </div>
