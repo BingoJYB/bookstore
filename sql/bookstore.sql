@@ -26,7 +26,7 @@ CREATE TABLE t_book (
 
 CREATE TABLE t_order (
     id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    create_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    create_time datetime NOT NULL,
     price decimal(7, 2) NOT NULL,
     status int DEFAULT 0,
     user_id int NOT NULL,
