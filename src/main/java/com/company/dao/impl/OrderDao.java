@@ -8,10 +8,9 @@ public class OrderDao extends BaseDao implements IOrderDao {
 
     public int saveOrder(Order order) {
 
-        String query = "INSERT INTO t_order (create_time, price, status, user_id) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO t_order (price, status, user_id) VALUES (?, ?, ?)";
 
-        return update(query, order.getCreateTime(), order.getPrice(), order.getStatus(), order.getUserId(),
-                order.getUserId());
+        return update(query, order.getPrice(), order.getStatus(), order.getUserId());
     }
 
     public int saveOrderItem(OrderItem orderItem) {
