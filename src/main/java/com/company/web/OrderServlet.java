@@ -1,0 +1,44 @@
+package com.company.web;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.company.entity.Cart;
+import com.company.entity.Order;
+import com.company.entity.User;
+import com.company.service.impl.OrderService;
+
+public class OrderServlet extends BaseServlet {
+
+    private OrderService orderService = new OrderService();
+
+    void checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        User user = (User) request.getSession().getAttribute("user");
+
+        int userId = user.getId();
+        String orderId = orderService.createOrder(cart, userId);
+
+        cart.clearCart();
+
+        request.getSession().setAttribute("orderId", orderId);
+        response.sendRedirect(request.getContextPath() + "/pages/cart/checkout.jsp");
+    }
+
+    void getMyOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        User user = (User) request.getSession().getAttribute("user");
+
+        int userId = user.getId();
+        List<Order> orders = orderService.getMyOrders(userId);
+
+        request.setAttribute("orderList", orders);
+        request.getRequestDispatcher("/pages/order/order.jsp").forward(request, response);
+    }
+
+}

@@ -2,13 +2,17 @@ package test.com.company.service;
 
 import com.company.entity.Cart;
 import com.company.entity.CartItem;
+import com.company.entity.Order;
 import com.company.service.impl.OrderService;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class OrderServiceTest {
 
@@ -33,9 +37,17 @@ public class OrderServiceTest {
         cart.addItem(item2, 2);
         cart.addItem(item3, 3);
 
-        int returnCode = orderService.createOrder(cart, 1);
+        String orderId = orderService.createOrder(cart, 1);
 
-        assertTrue(returnCode > 0);
+        assertNotNull(orderId);
+    }
+
+    @Test
+    public void testGetMyOrders() {
+
+        List<Order> orders = orderService.getMyOrders(1);
+
+        assertTrue(orders.size() > 0);
     }
 
 }

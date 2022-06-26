@@ -24,7 +24,8 @@ public class BookServlet extends BaseServlet {
 
         if (books != null) {
             request.setAttribute("books", books);
-            request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request, response);
+            request.getRequestDispatcher("BookServlet?method=getAllManagerAfter&pageNow="
+                    + bookService.getTotalPageSize(Constants.DEFAULT_PAGE_SIZE)).forward(request, response);
         }
     }
 

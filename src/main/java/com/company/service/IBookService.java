@@ -22,4 +22,6 @@ public interface IBookService {
 
     public Page getPageByPrice(int pageNow, int pageSize, BigDecimal min, BigDecimal max);
 
+    public int getTotalPageSize(int pageSize);
+
 }

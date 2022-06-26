@@ -1,9 +1,11 @@
 package com.company.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import com.company.dao.impl.OrderDao;
 import com.company.dao.impl.OrderItemDao;
+import com.company.entity.Book;
 import com.company.entity.Cart;
 import com.company.entity.CartItem;
 import com.company.entity.Order;
@@ -12,24 +14,38 @@ import com.company.service.IOrderService;
 
 public class OrderService implements IOrderService {
 
-    @Override
-    public int createOrder(Cart cart, Integer userId) {
-        int returnCode = -1;
-        OrderDao orderDao = new OrderDao();
-        OrderItemDao orderItemDao = new OrderItemDao();
+    OrderDao orderDao = new OrderDao();
+    OrderItemDao orderItemDao = new OrderItemDao();
+    private BookService bookService = new BookService();
 
-        String orderId = System.currentTimeMillis() + " " + userId;
+    @Override
+    public String createOrder(Cart cart, Integer userId) {
+
+        String orderId = System.currentTimeMillis() + "" + userId;
         Order order = new Order(orderId, new Date(), cart.getTotalPrice(), 0, userId);
-        returnCode = orderDao.saveOrder(order);
+        orderDao.saveOrder(order);
 
         for (CartItem item : cart.getItems().values()) {
             OrderItem orderItem = new OrderItem(null, item.getName(), item.getCount(), item.getPrice(),
                     item.getTotalPrice(), orderId);
 
-            returnCode *= orderItemDao.saveOrderItem(orderItem);
+            orderItemDao.saveOrderItem(orderItem);
+
+            Book book = bookService.queryBookByID(item.getId());
+            book.setSales(book.getSales() + item.getCount());
+            book.setStock(book.getStock() - item.getCount());
+            bookService.updateBook(book);
         }
 
-        return returnCode;
+        return orderId;
+    }
+
+    @Override
+    public List<Order> getMyOrders(Integer userId) {
+
+        List<Order> orders = orderDao.queryOrdersByUserId(userId);
+
+        return orders;
     }
 
 }

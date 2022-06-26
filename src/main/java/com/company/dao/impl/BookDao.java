@@ -61,7 +61,7 @@ public class BookDao extends BaseDao implements IBookDao {
     @Override
     public List<Book> getItemsPerPage(int pageNow, int pageSize) {
 
-        String query = "SELECT * FROM t_book LIMIT ?, ?";
+        String query = "SELECT id, name, price, author, sales, stock, img_path imgPath FROM t_book LIMIT ?, ?";
 
         return queryForList(Book.class, query, (pageNow - 1) * pageSize, pageSize);
     }
@@ -77,7 +77,7 @@ public class BookDao extends BaseDao implements IBookDao {
     @Override
     public List<Book> getItemsPerPageByPrice(int pageNow, int pageSize, BigDecimal min, BigDecimal max) {
 
-        String query = "SELECT * FROM t_book WHERE price BETWEEN ? AND ? LIMIT ?, ?";
+        String query = "SELECT id, name, price, author, sales, stock, img_path imgPath FROM t_book WHERE price BETWEEN ? AND ? LIMIT ?, ?";
 
         return queryForList(Book.class, query, min, max, (pageNow - 1) * pageSize, pageSize);
     }

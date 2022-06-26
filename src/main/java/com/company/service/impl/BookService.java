@@ -64,4 +64,13 @@ public class BookService implements IBookService {
         return page;
     }
 
+    @Override
+    public int getTotalPageSize(int pageSize) {
+
+        int totalCount = (int) bookDao.getTotalItemSize();
+        int totalPages = (totalCount + pageSize - 1) / pageSize;
+
+        return totalPages;
+    }
+
 }

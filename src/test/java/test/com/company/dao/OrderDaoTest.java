@@ -9,8 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OrderDaoTest {
 
@@ -32,6 +34,15 @@ public class OrderDaoTest {
         Order order = new Order(id, now, price, undelivered, 1);
 
         assertNotEquals(-1, orderDao.saveOrder(order));
+    }
+
+    @Test
+    public void testQueryOrdersByUserId() throws ParseException {
+
+        int userId = 1;
+        List<Order> orders = orderDao.queryOrdersByUserId(userId);
+
+        assertTrue(orders.size() > 0);
     }
 
 }
