@@ -32,7 +32,7 @@ public class Cart {
         }
 
         this.setTotalCount(this.getTotalCount() + 1);
-        this.setTotalPrice(this.getTotalPrice().add(item.getPrice()));
+        this.setTotalPrice(this.getTotalPrice().add(item.getTotalPrice()));
     }
 
     public void deleteItem(Integer id) {

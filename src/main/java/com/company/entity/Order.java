@@ -5,13 +5,13 @@ import java.util.Date;
 
 public class Order {
 
-    private Integer id;
+    private String id;
     private Date createTime;
     private BigDecimal price;
     private Integer status = 0;
     private Integer userId;
 
-    public Order(Integer id, Date createTime, BigDecimal price, Integer status, Integer userId) {
+    public Order(String id, Date createTime, BigDecimal price, Integer status, Integer userId) {
         this.id = id;
         this.createTime = createTime;
         this.price = price;
@@ -23,11 +23,11 @@ public class Order {
 
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

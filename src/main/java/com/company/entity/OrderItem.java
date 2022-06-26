@@ -9,9 +9,9 @@ public class OrderItem {
     private Integer count;
     private BigDecimal price;
     private BigDecimal totalPrice;
-    private Integer orderId;
+    private String orderId;
 
-    public OrderItem(Integer id, String name, Integer count, BigDecimal price, BigDecimal totalPrice, Integer orderId) {
+    public OrderItem(Integer id, String name, Integer count, BigDecimal price, BigDecimal totalPrice, String orderId) {
         this.id = id;
         this.name = name;
         this.count = count;
@@ -64,11 +64,11 @@ public class OrderItem {
         this.totalPrice = totalPrice;
     }
 
-    public Integer getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

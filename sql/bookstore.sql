@@ -25,7 +25,7 @@ CREATE TABLE t_book (
 );
 
 CREATE TABLE t_order (
-    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    id varchar(50) PRIMARY KEY,
     create_time datetime NOT NULL,
     price decimal(7, 2) NOT NULL,
     status int DEFAULT 0,
@@ -39,6 +39,6 @@ CREATE TABLE t_order_item (
     count int DEFAULT 0,
     price decimal(7, 2) NOT NULL,
     total_price decimal(7, 2) NOT NULL,
-    order_id int NOT NULL,
+    order_id  varchar(50) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES t_order(id)
 );
