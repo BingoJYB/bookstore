@@ -24,6 +24,7 @@
                         <a href="CartServlet?method=getItems">购物车</a>
                         <a href="OrderServlet?method=getMyOrder">我的订单</a>
                         <a href="UserServlet?method=logout">注销</a>&nbsp;&nbsp;
+                        <a href="pages/manager/manager.jsp">后台管理</a>
                         <a href="index.jsp">返回</a>
                     </div>
                 </div>
