@@ -76,7 +76,8 @@ public class UserServlet extends BaseServlet {
         boolean isUsernameInvalid = userService.isUsernameDuplicated(username);
 
         if (isUsernameInvalid) {
-            response.getWriter().write("Username exists");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("用户已存在!");
         }
     }
 
