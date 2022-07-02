@@ -60,63 +60,47 @@ public abstract class BaseDao {
         };
     }
 
-    public int update(String sql, Object... args) {
+    public int update(String sql, Object... args) throws SQLException {
 
         Connection conn = JDBCUtils.getConnection();
 
         try {
             return runner.update(conn, sql, args);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtils.close(conn);
+            throw new SQLException(e);
         }
-
-        return -1;
     }
 
-    public <T> T queryForOne(Class<T> type, String sql, Object... params) {
+    public <T> T queryForOne(Class<T> type, String sql, Object... params) throws SQLException {
 
         Connection conn = JDBCUtils.getConnection();
 
         try {
             return runner.query(conn, sql, new BeanHandler<T>(type), params);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtils.close(conn);
+            throw new SQLException(e);
         }
-
-        return null;
     }
 
-    public <T> List<T> queryForList(Class<T> type, String sql, Object... params) {
+    public <T> List<T> queryForList(Class<T> type, String sql, Object... params) throws SQLException {
 
         Connection conn = JDBCUtils.getConnection();
 
         try {
             return runner.query(conn, sql, getCustomHandler(type), params);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtils.close(conn);
+            throw new SQLException(e);
         }
-
-        return null;
     }
 
-    public <T> T queryForSingleValue(String sql, Object... params) {
+    public <T> T queryForSingleValue(String sql, Object... params) throws SQLException {
 
         Connection conn = JDBCUtils.getConnection();
 
         try {
             return runner.query(conn, sql, new ScalarHandler<T>(), params);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtils.close(conn);
+            throw new SQLException(e);
         }
-
-        return null;
     }
 }

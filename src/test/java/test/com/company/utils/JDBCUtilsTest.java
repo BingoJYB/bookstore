@@ -16,7 +16,7 @@ public class JDBCUtilsTest {
 
         assertNotNull(conn);
 
-        JDBCUtils.close(conn);
+        JDBCUtils.close();
     }
 
 }

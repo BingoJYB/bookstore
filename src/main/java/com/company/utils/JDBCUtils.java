@@ -14,6 +14,7 @@ public class JDBCUtils {
     private static String url;
     private static String username;
     private static String password;
+    private static ThreadLocal<Connection> conns = new ThreadLocal<Connection>();
 
     static {
         try {
@@ -45,10 +46,14 @@ public class JDBCUtils {
 
     public static Connection getConnection() {
 
-        Connection conn = null;
+        Connection conn = conns.get();
 
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            if (conn == null) {
+                conn = DriverManager.getConnection(url, username, password);
+                conns.set(conn);
+                conn.setAutoCommit(false);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,7 +61,9 @@ public class JDBCUtils {
         return conn;
     }
 
-    public static void close(Connection conn) {
+    public static void close() {
+
+        Connection conn = conns.get();
 
         if (conn != null) {
             try {
@@ -65,6 +72,48 @@ public class JDBCUtils {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void commitAndClose() {
+
+        Connection conn = conns.get();
+
+        try {
+            if (conn != null) {
+                conn.commit();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        conns.remove();
+    }
+
+    public static void rollbackAndClose() {
+
+        Connection conn = conns.get();
+
+        try {
+            if (conn != null) {
+                conn.rollback();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        conns.remove();
     }
 
 }
