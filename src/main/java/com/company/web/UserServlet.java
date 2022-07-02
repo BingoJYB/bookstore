@@ -68,4 +68,16 @@ public class UserServlet extends BaseServlet {
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
+    void checkUser(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+
+        String username = request.getParameter("username");
+
+        boolean isUsernameInvalid = userService.isUsernameDuplicated(username);
+
+        if (isUsernameInvalid) {
+            response.getWriter().write("Username exists");
+        }
+    }
+
 }

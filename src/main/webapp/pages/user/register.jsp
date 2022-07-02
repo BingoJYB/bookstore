@@ -14,15 +14,15 @@
             const url = "code.jpg?r=" + Math.random();
             $(this).prop("src", url);
           });
-          // $("input[name='username']").blur(function () {
-          //   $.get(
-          //     "UserServlet?method=cheekUser&username=" +
-          //     $("input[name='username']").val(),
-          //     function (data) {
-          //       $(".errorMsg").text(data);
-          //     }
-          //   );
-          // });
+          $("input[name='username']").blur(function () {
+            $.get(
+              "UserServlet?method=checkUser&username=" +
+              $("input[name='username']").val(),
+              function (data) {
+                $(".errorMsg").text(data);
+              }
+            );
+          });
           $("#sub_btn").click(function () {
             //获取表单项
             const username = $("input[name='username']").val();
@@ -116,7 +116,7 @@
                     width: 120px; 
                     margin-left: 18px;
                   " />
-                  <img alt="" src="code.jpg" id="codeImg" style="
+                  <img alt="" src="static/img/code.jpg" id="codeImg" style="
                     float: right;
                     margin-right: 23px;
                     width: 100px;
