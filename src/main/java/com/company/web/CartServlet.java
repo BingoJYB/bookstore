@@ -1,6 +1,7 @@
 package com.company.web;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import com.company.entity.Book;
 import com.company.entity.Cart;
 import com.company.entity.CartItem;
 import com.company.service.impl.BookService;
+import com.google.gson.Gson;
 
 public class CartServlet extends BaseServlet {
 
@@ -28,7 +30,15 @@ public class CartServlet extends BaseServlet {
         cart.addItem(cartItem, id);
         request.getSession().setAttribute("cart", cart);
         request.getSession().setAttribute("items", cart.getItems().values());
-        response.sendRedirect(request.getHeader("Referer"));
+
+        HashMap<String, String> hm = new HashMap<String, String>();
+        hm.put("total", Integer.toString(cart.getTotalCount()));
+        hm.put("name", book.getName());
+
+        Gson gson = new Gson();
+        String hmInJson = gson.toJson(hm);
+
+        response.getWriter().write(hmInJson);
     }
 
     void deleteItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
