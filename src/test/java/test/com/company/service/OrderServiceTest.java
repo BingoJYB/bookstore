@@ -3,6 +3,7 @@ package test.com.company.service;
 import com.company.entity.Cart;
 import com.company.entity.CartItem;
 import com.company.entity.Order;
+import com.company.entity.OrderItem;
 import com.company.service.impl.OrderService;
 
 import org.junit.jupiter.api.Test;
@@ -74,6 +75,15 @@ public class OrderServiceTest {
         int statusCode = orderService.accept(id);
 
         assertTrue(statusCode > 0);
+    }
+
+    @Test
+    public void testGetOrderDetail() {
+
+        String id = "16562817152171";
+        List<OrderItem> orderItems = orderService.getOrderDetails(id);
+
+        assertTrue(orderItems.size() > 0);
     }
 
 }

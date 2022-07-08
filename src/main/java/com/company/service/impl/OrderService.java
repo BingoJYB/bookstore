@@ -72,4 +72,12 @@ public class OrderService implements IOrderService {
         return statusCode;
     }
 
+    @Override
+    public List<OrderItem> getOrderDetails(String id) {
+
+        List<OrderItem> orderItems = orderItemDao.queryOrderItemsByOrderId(id);
+
+        return orderItems;
+    }
+
 }

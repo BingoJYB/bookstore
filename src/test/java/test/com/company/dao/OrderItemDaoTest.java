@@ -7,8 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OrderItemDaoTest {
 
@@ -31,6 +33,15 @@ public class OrderItemDaoTest {
         OrderItem orderItem = new OrderItem(null, name, count, price, totalPrice, orderId);
 
         assertNotEquals(-1, orderItemDao.saveOrderItem(orderItem));
+    }
+
+    @Test
+    public void testQueryOrderItemsByOrderId() {
+
+        String id = "16562817152171";
+        List<OrderItem> orderItems = orderItemDao.queryOrderItemsByOrderId(id);
+
+        assertTrue(orderItems.size() > 0);
     }
 
 }

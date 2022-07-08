@@ -39,8 +39,8 @@
             </tr>
             <c:forEach items="${orderItems}" var="orderItem">
               <tr>
-                <td>${orderItem.orderId}</td>
-                <td>${orderItem.title}</td>
+                <td>${orderItem.id}</td>
+                <td>${orderItem.name}</td>
                 <td>${orderItem.count}</td>
                 <td>${orderItem.price}</td>
                 <td>${orderItem.totalPrice}</td>

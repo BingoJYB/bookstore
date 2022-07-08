@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.company.entity.Cart;
 import com.company.entity.Order;
+import com.company.entity.OrderItem;
 import com.company.entity.User;
 import com.company.service.impl.OrderService;
 
@@ -69,6 +70,16 @@ public class OrderServlet extends BaseServlet {
         if (returnCode != -1) {
             response.sendRedirect(request.getContextPath() + "/OrderServlet?method=getMyOrder");
         }
+    }
+
+    void getOrderDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String id = request.getParameter("orderId");
+
+        List<OrderItem> orderItems = orderService.getOrderDetails(id);
+
+        request.setAttribute("orderItems", orderItems);
+        request.getRequestDispatcher("/pages/order/orderdetails.jsp").forward(request, response);
     }
 
 }
