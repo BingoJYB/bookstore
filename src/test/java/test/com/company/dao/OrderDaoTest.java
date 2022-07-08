@@ -53,4 +53,14 @@ public class OrderDaoTest {
         assertTrue(orders.size() > 0);
     }
 
+    @Test
+    public void testChangeOrderStatus() throws ParseException {
+
+        String id = "16562817152171";
+        Integer status = 1;
+        int statusCode = orderDao.changeOrderStatus(id, status);
+
+        assertTrue(statusCode > 0);
+    }
+
 }

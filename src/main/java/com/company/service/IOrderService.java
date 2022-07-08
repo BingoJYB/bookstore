@@ -11,4 +11,6 @@ public interface IOrderService {
     public List<Order> getMyOrders(Integer userId);
 
     public List<Order> getAllOrder();
+
+    public int sendOrder(String id);
 }

@@ -58,4 +58,13 @@ public class OrderServiceTest {
         assertTrue(orders.size() > 0);
     }
 
+    @Test
+    public void testSendOrder() {
+
+        String id = "16562817152171";
+        int statusCode = orderService.sendOrder(id);
+
+        assertTrue(statusCode > 0);
+    }
+
 }

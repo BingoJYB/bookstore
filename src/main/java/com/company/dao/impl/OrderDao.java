@@ -64,4 +64,23 @@ public class OrderDao extends BaseDao implements IOrderDao {
         return orders;
     }
 
+    @Override
+    public int changeOrderStatus(String id, Integer status) {
+
+        int statusCode = -1;
+        String query = "UPDATE t_order SET status = ? WHERE id = ?";
+
+        try {
+            statusCode = update(query, status, id);
+
+            JDBCUtils.commitAndClose();
+
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
+
+        return statusCode;
+
+    }
+
 }

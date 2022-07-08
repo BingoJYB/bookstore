@@ -49,4 +49,15 @@ public class OrderServlet extends BaseServlet {
         request.getRequestDispatcher("/pages/manager/order_manager.jsp").forward(request, response);
     }
 
+    void sendOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String id = request.getParameter("orderId");
+
+        int returnCode = orderService.sendOrder(id);
+
+        if (returnCode != -1) {
+            response.sendRedirect(request.getContextPath() + "/OrderServlet?method=getAllOrder");
+        }
+    }
+
 }

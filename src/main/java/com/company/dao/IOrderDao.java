@@ -12,4 +12,6 @@ public interface IOrderDao {
 
     public List<Order> queryOrders();
 
+    public int changeOrderStatus(String id, Integer status);
+
 }
