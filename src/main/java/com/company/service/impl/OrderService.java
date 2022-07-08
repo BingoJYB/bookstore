@@ -48,4 +48,12 @@ public class OrderService implements IOrderService {
         return orders;
     }
 
+    @Override
+    public List<Order> getAllOrder() {
+
+        List<Order> orders = orderDao.queryOrders();
+
+        return orders;
+    }
+
 }

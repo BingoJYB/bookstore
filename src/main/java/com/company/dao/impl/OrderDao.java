@@ -46,4 +46,22 @@ public class OrderDao extends BaseDao implements IOrderDao {
         return orders;
     }
 
+    @Override
+    public List<Order> queryOrders() {
+
+        List<Order> orders = new ArrayList<Order>();
+        String query = "SELECT id, create_time createTime, price, status, user_id userId FROM t_order";
+
+        try {
+            orders = queryForList(Order.class, query);
+
+            JDBCUtils.commitAndClose();
+
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
+
+        return orders;
+    }
+
 }

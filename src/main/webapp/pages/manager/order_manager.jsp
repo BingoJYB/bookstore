@@ -36,9 +36,9 @@
           </tr>
           <c:forEach items="${orderList}" var="order">
             <tr>
-              <td>${order.orderId}</td>
-              <td>${order.createDate}</td>
-              <td>${order.totalMoney}</td>
+              <td>${order.id}</td>
+              <td>${order.createTime}</td>
+              <td>${order.price}</td>
               <c:choose>
                 <c:when test="${order.status == 0}">
                   <td>未发货</td>
@@ -51,12 +51,12 @@
                 </c:when>
               </c:choose>
               <td>
-                <a href="OrderServlet?method=getOrderDetails&orderId=${order.orderId}">查看详情</a>
+                <a href="OrderServlet?method=getOrderDetails&orderId=${order.id}">查看详情</a>
               </td>
               <c:choose>
                 <c:when test="${order.status == 0}">
                   <td>
-                    <a href="OrderServlet?method=send&orderId=${order.orderId}" class="send">发货</a>
+                    <a href="OrderServlet?method=send&orderId=${order.id}" class="send">发货</a>
                   </td>
                 </c:when>
                 <c:when test="${order.status == 1}">

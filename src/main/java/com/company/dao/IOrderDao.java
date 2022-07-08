@@ -10,4 +10,6 @@ public interface IOrderDao {
 
     public List<Order> queryOrdersByUserId(Integer userId);
 
+    public List<Order> queryOrders();
+
 }

@@ -41,4 +41,12 @@ public class OrderServlet extends BaseServlet {
         request.getRequestDispatcher("/pages/order/order.jsp").forward(request, response);
     }
 
+    void getAllOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Order> orders = orderService.getAllOrder();
+
+        request.setAttribute("orderList", orders);
+        request.getRequestDispatcher("/pages/manager/order_manager.jsp").forward(request, response);
+    }
+
 }

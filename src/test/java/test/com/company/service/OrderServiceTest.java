@@ -50,4 +50,12 @@ public class OrderServiceTest {
         assertTrue(orders.size() > 0);
     }
 
+    @Test
+    public void testGetAllOrders() {
+
+        List<Order> orders = orderService.getAllOrder();
+
+        assertTrue(orders.size() > 0);
+    }
+
 }

@@ -9,4 +9,6 @@ public interface IOrderService {
     public String createOrder(Cart cart, Integer userId);
 
     public List<Order> getMyOrders(Integer userId);
+
+    public List<Order> getAllOrder();
 }

@@ -45,4 +45,12 @@ public class OrderDaoTest {
         assertTrue(orders.size() > 0);
     }
 
+    @Test
+    public void testQueryOrders() throws ParseException {
+
+        List<Order> orders = orderDao.queryOrders();
+
+        assertTrue(orders.size() > 0);
+    }
+
 }
