@@ -60,4 +60,15 @@ public class OrderServlet extends BaseServlet {
         }
     }
 
+    void accept(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String id = request.getParameter("orderId");
+
+        int returnCode = orderService.accept(id);
+
+        if (returnCode != -1) {
+            response.sendRedirect(request.getContextPath() + "/OrderServlet?method=getMyOrder");
+        }
+    }
+
 }

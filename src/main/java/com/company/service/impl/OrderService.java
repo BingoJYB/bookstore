@@ -64,4 +64,12 @@ public class OrderService implements IOrderService {
         return statusCode;
     }
 
+    @Override
+    public int accept(String id) {
+
+        int statusCode = orderDao.changeOrderStatus(id, 2);
+
+        return statusCode;
+    }
+
 }

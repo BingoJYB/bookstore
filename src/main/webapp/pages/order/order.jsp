@@ -51,7 +51,7 @@
                     </c:when>
                     <c:when test="${order.status == 1}">
                       <td>
-                        <a href="OrderServlet?method=accept&orderId=${order.orderId}" class="accept">收货</a>
+                        <a href="OrderServlet?method=accept&orderId=${order.id}" class="accept">收货</a>
                       </td>
                     </c:when>
                     <c:when test="${order.status == 2}">

@@ -67,4 +67,13 @@ public class OrderServiceTest {
         assertTrue(statusCode > 0);
     }
 
+    @Test
+    public void testAcceptOrder() {
+
+        String id = "16562817152171";
+        int statusCode = orderService.accept(id);
+
+        assertTrue(statusCode > 0);
+    }
+
 }

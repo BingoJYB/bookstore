@@ -13,4 +13,6 @@ public interface IOrderService {
     public List<Order> getAllOrder();
 
     public int sendOrder(String id);
+
+    public int accept(String id);
 }
