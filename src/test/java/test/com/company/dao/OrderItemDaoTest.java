@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -23,7 +24,7 @@ public class OrderItemDaoTest {
     }
 
     @Test
-    public void testSaveOrderItem() {
+    public void testSaveOrderItem() throws SQLException {
 
         String name = "105 Men and 3 Women Story";
         Integer count = 2;
@@ -36,7 +37,7 @@ public class OrderItemDaoTest {
     }
 
     @Test
-    public void testQueryOrderItemsByOrderId() {
+    public void testQueryOrderItemsByOrderId() throws SQLException {
 
         String id = "16562817152171";
         List<OrderItem> orderItems = orderItemDao.queryOrderItemsByOrderId(id);

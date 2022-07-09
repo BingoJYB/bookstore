@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,7 @@ public class OrderDaoTest {
     }
 
     @Test
-    public void testSaveOrder() throws ParseException {
+    public void testSaveOrder() throws ParseException, SQLException {
 
         String id = "ORDERID";
         Date now = new Date();
@@ -37,7 +38,7 @@ public class OrderDaoTest {
     }
 
     @Test
-    public void testQueryOrdersByUserId() throws ParseException {
+    public void testQueryOrdersByUserId() throws ParseException, SQLException {
 
         int userId = 1;
         List<Order> orders = orderDao.queryOrdersByUserId(userId);
@@ -46,7 +47,7 @@ public class OrderDaoTest {
     }
 
     @Test
-    public void testQueryOrders() throws ParseException {
+    public void testQueryOrders() throws ParseException, SQLException {
 
         List<Order> orders = orderDao.queryOrders();
 
@@ -54,7 +55,7 @@ public class OrderDaoTest {
     }
 
     @Test
-    public void testSendOrder() throws ParseException {
+    public void testSendOrder() throws ParseException, SQLException {
 
         String id = "16562817152171";
         Integer status = 1;
@@ -64,7 +65,7 @@ public class OrderDaoTest {
     }
 
     @Test
-    public void testAcceptOrder() throws ParseException {
+    public void testAcceptOrder() throws ParseException, SQLException {
 
         String id = "16562817152171";
         Integer status = 2;

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.company.dao.impl.BookDao;
@@ -23,7 +24,7 @@ public class BookDaoTest {
     }
 
     @Test
-    public void testAddBook() {
+    public void testAddBook() throws SQLException {
 
         Book book = new Book(null, "Sample", new BigDecimal(100.00), "Stephen Hawking", 0, 20, null);
 
@@ -31,7 +32,7 @@ public class BookDaoTest {
     }
 
     @Test
-    public void testUpdateBook() {
+    public void testUpdateBook() throws SQLException {
 
         Book book = new Book(1, "Sample", new BigDecimal(100.00), "Stephen Hawking", 10, 10, null);
 
@@ -39,7 +40,7 @@ public class BookDaoTest {
     }
 
     @Test
-    public void testQueryBookByID() {
+    public void testQueryBookByID() throws SQLException {
 
         Book book = bookDao.queryBookByID(1);
 
@@ -47,7 +48,7 @@ public class BookDaoTest {
     }
 
     @Test
-    public void testQueryBooks() {
+    public void testQueryBooks() throws SQLException {
 
         List<Book> books = bookDao.queryBooks();
 
@@ -55,33 +56,33 @@ public class BookDaoTest {
     }
 
     @Test
-    public void testGetTotalItemSize() {
+    public void testGetTotalItemSize() throws SQLException {
 
         assertEquals(1, bookDao.getTotalItemSize());
     }
 
     @Test
-    public void testGetItemsPerPage() {
+    public void testGetItemsPerPage() throws SQLException {
 
         List<Book> books = bookDao.getItemsPerPage(1, 1);
         assertEquals(1, books.size());
     }
 
     @Test
-    public void testGetTotalItemSizeByPrice() {
+    public void testGetTotalItemSizeByPrice() throws SQLException {
 
         assertEquals(2, bookDao.getTotalItemSizeByPrice(new BigDecimal(1.0), new BigDecimal(20.0)));
     }
 
     @Test
-    public void testGetItemsPerPageByPrice() {
+    public void testGetItemsPerPageByPrice() throws SQLException {
 
         List<Book> books = bookDao.getItemsPerPageByPrice(1, 2, new BigDecimal(1.0), new BigDecimal(20.0));
         assertEquals(2, books.size());
     }
 
     @Test
-    public void testDeleteBookByID() {
+    public void testDeleteBookByID() throws SQLException {
 
         assertNotEquals(-1, bookDao.deleteBookByID(1));
     }

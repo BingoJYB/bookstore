@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.sql.SQLException;
+
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -24,7 +27,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testRegisterUser() {
+    public void testRegisterUser() throws SQLException {
 
         User user = new User(null, "Iron Man", "321", "man.iron@gmail.com");
 
@@ -34,20 +37,20 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testLogin() {
+    public void testLogin() throws SQLException {
 
         assertNotNull(userService.login("Iron Man", "321"));
     }
 
     @Test
-    public void testIsUsernameDuplicated() {
+    public void testIsUsernameDuplicated() throws SQLException {
 
         assertTrue(userService.isUsernameDuplicated("Iron Man"));
         assertFalse(userService.isUsernameDuplicated("Batman"));
     }
 
     @Test
-    public void testDeregisterUser() {
+    public void testDeregisterUser() throws SQLException {
 
         User user = new User(null, "Iron Man", "321", "man.iron@gmail.com");
 

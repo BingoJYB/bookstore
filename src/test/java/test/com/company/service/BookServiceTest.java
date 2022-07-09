@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.company.entity.Book;
@@ -24,7 +25,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void testAddBook() {
+    public void testAddBook() throws SQLException {
 
         Book book = new Book(null, "Sample Book", new BigDecimal(100.00), "Stephen Hawking", 0, 20, null);
 
@@ -32,7 +33,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void testUpdateBook() {
+    public void testUpdateBook() throws SQLException {
 
         Book book = new Book(1, "Sample Book", new BigDecimal(100.00), "Stephen Hawking", 10, 10, null);
 
@@ -40,7 +41,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void testQueryBookByID() {
+    public void testQueryBookByID() throws SQLException {
 
         Book book = bookService.queryBookByID(1);
 
@@ -48,7 +49,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void testQueryBooks() {
+    public void testQueryBooks() throws SQLException {
 
         List<Book> books = bookService.queryBooks();
 
@@ -56,7 +57,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void testGetPage() {
+    public void testGetPage() throws SQLException {
 
         Page page = bookService.getPage(1, 1);
 
@@ -65,7 +66,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void testGetPageByPrice() {
+    public void testGetPageByPrice() throws SQLException {
 
         Page page = bookService.getPageByPrice(1, 1, new BigDecimal(1.0), new BigDecimal(20.0));
 
@@ -74,7 +75,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void testDeleteBookByID() {
+    public void testDeleteBookByID() throws SQLException {
 
         assertNotEquals(-1, bookService.deleteBookByID(1));
     }

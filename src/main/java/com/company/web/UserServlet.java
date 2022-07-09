@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.company.entity.User;
 import com.company.service.impl.UserService;
+import com.company.utils.JDBCUtils;
 import com.company.utils.WebUtils;
 
 public class UserServlet extends BaseServlet {
@@ -17,10 +18,16 @@ public class UserServlet extends BaseServlet {
 
     void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        User user = null;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        User user = userService.login(username, password);
+        try {
+            user = userService.login(username, password);
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
 
         if (user == null) {
             request.setAttribute("username", username);
@@ -44,7 +51,14 @@ public class UserServlet extends BaseServlet {
         String code = request.getParameter("code");
 
         if (code.equals(codeInSession)) {
-            int returnCode = userService.registerUser(user);
+            int returnCode = -1;
+
+            try {
+                returnCode = userService.registerUser(user);
+                JDBCUtils.commitAndClose();
+            } catch (SQLException e) {
+                JDBCUtils.rollbackAndClose();
+            }
 
             if (returnCode == -1) {
                 request.setAttribute("username", request.getParameter("username"));
@@ -70,11 +84,17 @@ public class UserServlet extends BaseServlet {
     }
 
     void checkUser(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
 
+        boolean isUsernameInvalid = false;
         String username = request.getParameter("username");
 
-        boolean isUsernameInvalid = userService.isUsernameDuplicated(username);
+        try {
+            isUsernameInvalid = userService.isUsernameDuplicated(username);
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
 
         if (isUsernameInvalid) {
             response.setCharacterEncoding("UTF-8");

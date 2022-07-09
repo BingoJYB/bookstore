@@ -1,6 +1,7 @@
 package com.company.web;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import com.company.entity.Book;
 import com.company.entity.Cart;
 import com.company.entity.CartItem;
 import com.company.service.impl.BookService;
+import com.company.utils.JDBCUtils;
 import com.google.gson.Gson;
 
 public class CartServlet extends BaseServlet {
@@ -19,26 +21,34 @@ public class CartServlet extends BaseServlet {
 
     void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = Integer.parseInt(request.getParameter("id"));
-        Book book = bookService.queryBookByID(id);
-        CartItem cartItem = new CartItem(id, book.getName(), 1, book.getPrice());
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
 
-        if (cart == null) {
-            cart = new Cart();
+        try {
+            Book book = bookService.queryBookByID(id);
+
+            JDBCUtils.commitAndClose();
+
+            CartItem cartItem = new CartItem(id, book.getName(), 1, book.getPrice());
+            Cart cart = (Cart) request.getSession().getAttribute("cart");
+
+            if (cart == null) {
+                cart = new Cart();
+            }
+
+            cart.addItem(cartItem, id);
+            request.getSession().setAttribute("cart", cart);
+            request.getSession().setAttribute("items", cart.getItems().values());
+
+            HashMap<String, String> hm = new HashMap<String, String>();
+            hm.put("total", Integer.toString(cart.getTotalCount()));
+            hm.put("name", book.getName());
+
+            Gson gson = new Gson();
+            String hmInJson = gson.toJson(hm);
+
+            response.getWriter().write(hmInJson);
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
         }
-
-        cart.addItem(cartItem, id);
-        request.getSession().setAttribute("cart", cart);
-        request.getSession().setAttribute("items", cart.getItems().values());
-
-        HashMap<String, String> hm = new HashMap<String, String>();
-        hm.put("total", Integer.toString(cart.getTotalCount()));
-        hm.put("name", book.getName());
-
-        Gson gson = new Gson();
-        String hmInJson = gson.toJson(hm);
-
-        response.getWriter().write(hmInJson);
     }
 
     void deleteItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

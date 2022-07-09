@@ -7,173 +7,110 @@ import java.util.List;
 
 import com.company.dao.IBookDao;
 import com.company.entity.Book;
-import com.company.utils.JDBCUtils;
 
 public class BookDao extends BaseDao implements IBookDao {
 
     @Override
-    public int addBook(Book book) {
+    public int addBook(Book book) throws SQLException {
 
         int statusCode = -1;
         String query = "INSERT INTO t_book (name, price, author, sales, stock, img_path) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try {
-            statusCode = update(query, book.getName(), book.getPrice(), book.getAuthor(), book.getSales(),
-                    book.getStock(),
-                    book.getImgPath());
-
-            JDBCUtils.commitAndClose();
-
-        } catch (SQLException e) {
-            JDBCUtils.rollbackAndClose();
-        }
+        statusCode = update(query, book.getName(), book.getPrice(), book.getAuthor(), book.getSales(),
+                book.getStock(),
+                book.getImgPath());
 
         return statusCode;
     }
 
     @Override
-    public int deleteBookByID(Integer id) {
+    public int deleteBookByID(Integer id) throws SQLException {
 
         int statusCode = -1;
         String query = "DELETE FROM t_book WHERE id = ?";
 
-        try {
-            statusCode = update(query, id);
-
-            JDBCUtils.commitAndClose();
-
-        } catch (SQLException e) {
-            JDBCUtils.rollbackAndClose();
-        }
+        statusCode = update(query, id);
 
         return statusCode;
     }
 
     @Override
-    public int updateBook(Book book) {
+    public int updateBook(Book book) throws SQLException {
 
         int statusCode = -1;
         String query = "UPDATE t_book SET name = ?, price = ?, author = ?, sales = ?, stock = ?, img_path = ? WHERE id = ?";
 
-        try {
-            statusCode = update(query, book.getName(), book.getPrice(), book.getAuthor(), book.getSales(),
-                    book.getStock(),
-                    book.getImgPath(),
-                    book.getId());
-
-            JDBCUtils.commitAndClose();
-
-        } catch (SQLException e) {
-            JDBCUtils.rollbackAndClose();
-        }
+        statusCode = update(query, book.getName(), book.getPrice(), book.getAuthor(), book.getSales(),
+                book.getStock(),
+                book.getImgPath(),
+                book.getId());
 
         return statusCode;
     }
 
     @Override
-    public Book queryBookByID(Integer id) {
+    public Book queryBookByID(Integer id) throws SQLException {
 
         Book book = null;
         String query = "SELECT id, name, price, author, sales, stock, img_path imgPath FROM t_book WHERE id = ?";
 
-        try {
-            book = queryForOne(Book.class, query, id);
-
-            JDBCUtils.commitAndClose();
-
-        } catch (SQLException e) {
-            JDBCUtils.rollbackAndClose();
-        }
+        book = queryForOne(Book.class, query, id);
 
         return book;
     }
 
     @Override
-    public List<Book> queryBooks() {
+    public List<Book> queryBooks() throws SQLException {
 
         List<Book> books = new ArrayList<Book>();
         String query = "SELECT id, name, price, author, sales, stock, img_path imgPath FROM t_book";
 
-        try {
-            books = queryForList(Book.class, query);
-
-            JDBCUtils.commitAndClose();
-
-        } catch (SQLException e) {
-            JDBCUtils.rollbackAndClose();
-        }
+        books = queryForList(Book.class, query);
 
         return books;
     }
 
     @Override
-    public long getTotalItemSize() {
+    public long getTotalItemSize() throws SQLException {
 
         long totalSize = 0;
         String query = "SELECT COUNT(*) FROM t_book";
 
-        try {
-            totalSize = queryForSingleValue(query);
-
-            JDBCUtils.commitAndClose();
-
-        } catch (SQLException e) {
-            JDBCUtils.rollbackAndClose();
-        }
+        totalSize = queryForSingleValue(query);
 
         return totalSize;
     }
 
     @Override
-    public List<Book> getItemsPerPage(int pageNow, int pageSize) {
+    public List<Book> getItemsPerPage(int pageNow, int pageSize) throws SQLException {
 
         List<Book> books = new ArrayList<Book>();
         String query = "SELECT id, name, price, author, sales, stock, img_path imgPath FROM t_book LIMIT ?, ?";
 
-        try {
-            books = queryForList(Book.class, query, (pageNow - 1) * pageSize, pageSize);
-
-            JDBCUtils.commitAndClose();
-
-        } catch (SQLException e) {
-            JDBCUtils.rollbackAndClose();
-        }
+        books = queryForList(Book.class, query, (pageNow - 1) * pageSize, pageSize);
 
         return books;
     }
 
     @Override
-    public long getTotalItemSizeByPrice(BigDecimal min, BigDecimal max) {
+    public long getTotalItemSizeByPrice(BigDecimal min, BigDecimal max) throws SQLException {
 
         long totalSize = 0;
         String query = "SELECT COUNT(*) FROM t_book WHERE price BETWEEN ? AND ?";
 
-        try {
-            totalSize = queryForSingleValue(query, min, max);
-
-            JDBCUtils.commitAndClose();
-
-        } catch (SQLException e) {
-            JDBCUtils.rollbackAndClose();
-        }
+        totalSize = queryForSingleValue(query, min, max);
 
         return totalSize;
     }
 
     @Override
-    public List<Book> getItemsPerPageByPrice(int pageNow, int pageSize, BigDecimal min, BigDecimal max) {
+    public List<Book> getItemsPerPageByPrice(int pageNow, int pageSize, BigDecimal min, BigDecimal max)
+            throws SQLException {
 
         List<Book> books = new ArrayList<Book>();
         String query = "SELECT id, name, price, author, sales, stock, img_path imgPath FROM t_book WHERE price BETWEEN ? AND ? LIMIT ?, ?";
 
-        try {
-            books = queryForList(Book.class, query, min, max, (pageNow - 1) * pageSize, pageSize);
-
-            JDBCUtils.commitAndClose();
-
-        } catch (SQLException e) {
-            JDBCUtils.rollbackAndClose();
-        }
+        books = queryForList(Book.class, query, min, max, (pageNow - 1) * pageSize, pageSize);
 
         return books;
     }

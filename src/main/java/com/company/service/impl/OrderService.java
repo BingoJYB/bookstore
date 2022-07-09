@@ -1,5 +1,6 @@
 package com.company.service.impl;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class OrderService implements IOrderService {
     private BookService bookService = new BookService();
 
     @Override
-    public String createOrder(Cart cart, Integer userId) {
+    public String createOrder(Cart cart, Integer userId) throws SQLException {
 
         String orderId = System.currentTimeMillis() + "" + userId;
         Order order = new Order(orderId, new Date(), cart.getTotalPrice(), 0, userId);
@@ -41,7 +42,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<Order> getMyOrders(Integer userId) {
+    public List<Order> getMyOrders(Integer userId) throws SQLException {
 
         List<Order> orders = orderDao.queryOrdersByUserId(userId);
 
@@ -49,7 +50,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<Order> getAllOrder() {
+    public List<Order> getAllOrder() throws SQLException {
 
         List<Order> orders = orderDao.queryOrders();
 
@@ -57,7 +58,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public int sendOrder(String id) {
+    public int sendOrder(String id) throws SQLException {
 
         int statusCode = orderDao.changeOrderStatus(id, 1);
 
@@ -65,7 +66,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public int accept(String id) {
+    public int accept(String id) throws SQLException {
 
         int statusCode = orderDao.changeOrderStatus(id, 2);
 
@@ -73,7 +74,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<OrderItem> getOrderDetails(String id) {
+    public List<OrderItem> getOrderDetails(String id) throws SQLException {
 
         List<OrderItem> orderItems = orderItemDao.queryOrderItemsByOrderId(id);
 

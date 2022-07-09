@@ -2,6 +2,7 @@ package com.company.web;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import com.company.entity.Book;
 import com.company.entity.Page;
 import com.company.service.impl.BookService;
 import com.company.utils.Constants;
+import com.company.utils.JDBCUtils;
 import com.company.utils.WebUtils;
 
 public class BookServlet extends BaseServlet {
@@ -20,21 +22,33 @@ public class BookServlet extends BaseServlet {
 
     public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Book> books = bookService.queryBooks();
+        try {
+            List<Book> books = bookService.queryBooks();
 
-        if (books != null) {
-            request.setAttribute("books", books);
-            request.getRequestDispatcher("BookServlet?method=getAllManagerAfter&pageNow="
-                    + bookService.getTotalPageSize(Constants.DEFAULT_PAGE_SIZE)).forward(request, response);
+            if (books != null) {
+                request.setAttribute("books", books);
+                request.getRequestDispatcher("BookServlet?method=getAllManagerAfter&pageNow="
+                        + bookService.getTotalPageSize(Constants.DEFAULT_PAGE_SIZE)).forward(request, response);
+            }
+
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
         }
     }
 
     public void addBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int returnCode = -1;
         Book book = new Book();
         WebUtils.mapParam2Bean(request, book);
 
-        int returnCode = bookService.addBook(book);
+        try {
+            returnCode = bookService.addBook(book);
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
 
         if (returnCode != -1) {
             response.sendRedirect(request.getContextPath() + "/BookServlet?method=list");
@@ -44,9 +58,15 @@ public class BookServlet extends BaseServlet {
     public void deleteBook(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        int returnCode = -1;
         Integer id = Integer.parseInt(request.getParameter("id"));
 
-        int returnCode = bookService.deleteBookByID(id);
+        try {
+            returnCode = bookService.deleteBookByID(id);
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
 
         if (returnCode != -1) {
             response.sendRedirect(request.getContextPath() + "/BookServlet?method=list");
@@ -56,9 +76,15 @@ public class BookServlet extends BaseServlet {
     public void getBook(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Book book = null;
         Integer id = Integer.parseInt(request.getParameter("id"));
 
-        Book book = bookService.queryBookByID(id);
+        try {
+            book = bookService.queryBookByID(id);
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
 
         if (book != null) {
             request.setAttribute("book", book);
@@ -69,10 +95,16 @@ public class BookServlet extends BaseServlet {
     public void updateBook(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        int returnCode = -1;
         Book book = new Book();
         WebUtils.mapParam2Bean(request, book);
 
-        int returnCode = bookService.updateBook(book);
+        try {
+            returnCode = bookService.updateBook(book);
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
 
         if (returnCode != -1) {
             response.sendRedirect(request.getContextPath() + "/BookServlet?method=list");
@@ -82,10 +114,16 @@ public class BookServlet extends BaseServlet {
     public void getAllManagerAfter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Page page = null;
         Integer pageNow = WebUtils.parseInt(request.getParameter("pageNow"), 1);
         Integer pageSize = WebUtils.parseInt(request.getParameter("pageSize"), Constants.DEFAULT_PAGE_SIZE);
 
-        Page page = bookService.getPage(pageNow, pageSize);
+        try {
+            page = bookService.getPage(pageNow, pageSize);
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
 
         if (page != null) {
             request.setAttribute("page", page);
@@ -97,10 +135,16 @@ public class BookServlet extends BaseServlet {
     public void getAllHomeAfter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Page page = null;
         Integer pageNow = WebUtils.parseInt(request.getParameter("pageNow"), 1);
         Integer pageSize = WebUtils.parseInt(request.getParameter("pageSize"), Constants.DEFAULT_PAGE_SIZE);
 
-        Page page = bookService.getPage(pageNow, pageSize);
+        try {
+            page = bookService.getPage(pageNow, pageSize);
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
 
         if (page != null) {
             request.setAttribute("page", page);
@@ -113,6 +157,7 @@ public class BookServlet extends BaseServlet {
     public void getAllHomeByPrice(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Page page = null;
         BigDecimal min;
         BigDecimal max;
 
@@ -133,7 +178,13 @@ public class BookServlet extends BaseServlet {
             max = new BigDecimal(maxStr);
         }
 
-        Page page = bookService.getPageByPrice(pageNow, pageSize, min, max);
+        try {
+            page = bookService.getPageByPrice(pageNow, pageSize, min, max);
+            JDBCUtils.commitAndClose();
+        } catch (SQLException e) {
+            JDBCUtils.rollbackAndClose();
+        }
+        
         StringBuilder enhancedUrl = new StringBuilder(Constants.HOME_PAGING_BY_PRICE_URL);
         enhancedUrl.append("&min=").append(min.toString());
         enhancedUrl.append("&max=").append(max.toString());

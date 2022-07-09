@@ -6,6 +6,9 @@ import com.company.entity.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.sql.SQLException;
+
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class UserDaoTest {
@@ -19,7 +22,7 @@ public class UserDaoTest {
     }
 
     @Test
-    public void testSaveUser() {
+    public void testSaveUser() throws SQLException {
 
         User user = new User(null, "admin", "123", "admin@gmail.com");
 
@@ -27,19 +30,19 @@ public class UserDaoTest {
     }
 
     @Test
-    public void testGetUserByUsername() {
+    public void testGetUserByUsername() throws SQLException {
 
         assertNotNull(userDao.getUserByUsername("admin"));
     }
 
     @Test
-    public void testGetUserByUsernameAndPassword() {
+    public void testGetUserByUsernameAndPassword() throws SQLException {
 
         assertNotNull(userDao.getUserByUsernameAndPassword("admin", "123"));
     }
 
     @Test
-    public void testDeleteUser() {
+    public void testDeleteUser() throws SQLException {
 
         User user = new User(null, "admin", "123", "admin@gmail.com");
 

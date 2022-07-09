@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 public class OrderServiceTest {
@@ -26,7 +27,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testCreateOrder() {
+    public void testCreateOrder() throws SQLException {
 
         CartItem item1 = new CartItem(null, "Harry Potter", 1, new BigDecimal(10.0));
         CartItem item2 = new CartItem(null, "King Lion", 2, new BigDecimal(20.0));
@@ -44,7 +45,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testGetMyOrders() {
+    public void testGetMyOrders() throws SQLException {
 
         List<Order> orders = orderService.getMyOrders(1);
 
@@ -52,7 +53,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testGetAllOrders() {
+    public void testGetAllOrders() throws SQLException {
 
         List<Order> orders = orderService.getAllOrder();
 
@@ -60,7 +61,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testSendOrder() {
+    public void testSendOrder() throws SQLException {
 
         String id = "16562817152171";
         int statusCode = orderService.sendOrder(id);
@@ -69,7 +70,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testAcceptOrder() {
+    public void testAcceptOrder() throws SQLException {
 
         String id = "16562817152171";
         int statusCode = orderService.accept(id);
@@ -78,7 +79,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testGetOrderDetail() {
+    public void testGetOrderDetail() throws SQLException {
 
         String id = "16562817152171";
         List<OrderItem> orderItems = orderService.getOrderDetails(id);
